@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CrudChequesApplication<crud-cheques>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.GestorCheques.crudcheques.CrudChequesApplication",
+            "projectName": "crud-cheques",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
