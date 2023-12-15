@@ -24,6 +24,7 @@ public class Cheque {
     private String estado;
     private String nombreDestino;
     private String codigoDestino;
+    private Boolean activo = true;
     
 }
 

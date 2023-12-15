@@ -1,5 +1,8 @@
 package com.GestorCheques.crudcheques.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.GestorCheques.crudcheques.models.Cheque;
@@ -17,5 +20,14 @@ public class ChequeService {
     public Cheque guardarCheque(Cheque cheque) {
         return chequeRepository.save(cheque);
     }
+
+    public List<Cheque> listarCheques() {
+        return chequeRepository.findAll();
+    }
+
+    public Optional<Cheque> detalleCheque(String id) {
+        return chequeRepository.findById(id);
+    }
+
 }
 
