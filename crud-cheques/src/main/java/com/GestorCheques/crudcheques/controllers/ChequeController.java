@@ -50,6 +50,7 @@ public class ChequeController {
     @GetMapping("/listar")
     public ResponseEntity<List<Cheque>> listarCheques() {
         List<Cheque> cheques = chequeService.listarCheques();
+
         if (cheques.isEmpty()) {
             return ResponseEntity.noContent().build(); // Si no hay cheques, devuelve 204 No Content
         } else {
