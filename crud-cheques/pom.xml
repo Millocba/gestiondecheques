@@ -89,6 +89,13 @@
 			<artifactId>webjars-locator</artifactId>
 			<version>0.47</version>
 		</dependency>
+
+		<dependency>
+    		<groupId>org.hibernate.validator</groupId>
+    		<artifactId>hibernate-validator</artifactId>
+    	<version>6.2.0.Final</version> <!-- Versión específica de Hibernate Validator -->
+</dependency>
+
 	</dependencies>
 
 	<build>
