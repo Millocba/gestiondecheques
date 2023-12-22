@@ -18,6 +18,7 @@ import com.GestorCheques.crudcheques.services.ChequeService;
 
 import jakarta.validation.Valid;
 
+
 @RestController
 @RequestMapping("/cheques")
 public class ChequeController {
@@ -29,25 +30,15 @@ public class ChequeController {
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<String> agregarCheque(@Valid @RequestBody Cheque cheque, BindingResult bindingResult) {
-        
-        if (bindingResult.hasErrors()) {
-            // Errores de validación aquí
-            return ResponseEntity.badRequest().body("Error en los datos proporcionados");
-        }
+    public ResponseEntity<String> agregarCheque(@Valid @RequestBody Cheque cheque) {
         
         Cheque chequeGuardado = chequeService.guardarCheque(cheque);
         return ResponseEntity.ok("Cheque agregado con ID: " + chequeGuardado.getId());
     }
 
     @PutMapping("/modificar/{id}")
-    public ResponseEntity<String> modificarCheque(@Valid @PathVariable String id, @RequestBody Cheque cheque, BindingResult bindingResult) {
+    public ResponseEntity<String> modificarCheque(@Valid @PathVariable String id, @RequestBody Cheque cheque) {
 
-        if (bindingResult.hasErrors()) {
-            // Errores de validación aquí
-            return ResponseEntity.badRequest().body("Error en los datos proporcionados");
-        }
-        
         Cheque chequeModificado = chequeService.modificarCheque(id, cheque);
         return ResponseEntity.ok("Cheque modificado con ID: " + chequeModificado.getId());
     }

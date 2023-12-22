@@ -91,10 +91,10 @@
 		</dependency>
 
 		<dependency>
-    		<groupId>org.hibernate.validator</groupId>
-    		<artifactId>hibernate-validator</artifactId>
-    	<version>6.2.0.Final</version> <!-- Versión específica de Hibernate Validator -->
-</dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
 
 	</dependencies>
 
