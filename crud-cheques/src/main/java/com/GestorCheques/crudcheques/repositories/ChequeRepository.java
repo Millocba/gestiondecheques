@@ -10,6 +10,8 @@ import com.GestorCheques.crudcheques.models.Cheque;
 @Repository
 public interface ChequeRepository extends MongoRepository<Cheque, String> {
     List<Cheque> findByActivoTrue();
+
+    List<Cheque> findByMontoGreaterThan(double monto);
 }
 
 
