@@ -44,6 +44,7 @@ public class ChequeService {
             // Guarda el cheque actualizado en la base de datos
             Cheque cheque = chequeExistente.get();
             cheque.setActivo(false); // Marca el cheque como inactivo
+            chequeRepository.save(cheque);
         } else {
             throw new ChequeNotFoundException(id);
         }
