@@ -1,7 +1,11 @@
 package com.GestorCheques.crudcheques.controllers;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.GestorCheques.crudcheques.models.Cheque;
+import com.GestorCheques.crudcheques.models.FechaRequest;
 import com.GestorCheques.crudcheques.services.ChequeService;
 
 import jakarta.validation.Valid;
@@ -77,10 +82,18 @@ public class ChequeController {
         return cheques.isEmpty()
                 ? ResponseEntity.noContent().build()
                 : ResponseEntity.ok(cheques);
-        /* if (cheques.isEmpty()) {
-            return ResponseEntity.noContent().build(); // Si no hay cheques encontrados
-        } else {
-            return ResponseEntity.ok(cheques); // Si hay cheques encontrados
-        } */
+    }
+
+    @GetMapping("/buscarporfecha")
+    public ResponseEntity<List<Cheque>> buscarChequesPorFecha(@Valid @RequestBody FechaRequest data) {
+        Date fecha1 = data.getFechaInicio();
+        Date fecha2 = data.getFechaFin();
+        if (fecha2 == null){
+            fecha2 = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        }
+        List<Cheque> cheques = chequeService.buscarPorFecha(fecha1, fecha2);
+        return cheques.isEmpty()
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok(cheques);
     }
 }
