@@ -68,5 +68,9 @@ public class ChequeService {
         
     }
 
+    public List<Cheque> buscarPorMonto(double monto) {
+        return chequeRepository.findByMontoGreaterThan(monto);
+    }
+
 }
 

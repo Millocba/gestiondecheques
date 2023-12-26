@@ -70,4 +70,17 @@ public class ChequeController {
         chequeService.eliminarChequeLogico(id);
         return ResponseEntity.ok("Cheque eliminado lógicamente con ID: " + id);
     }
+
+    @GetMapping("/buscarpormonto/{monto}")
+    public ResponseEntity<List<Cheque>> buscarChequesPorMontoSuperior(@PathVariable double monto) {
+        List<Cheque> cheques = chequeService.buscarPorMonto(monto);
+        return cheques.isEmpty()
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok(cheques);
+        /* if (cheques.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Si no hay cheques encontrados
+        } else {
+            return ResponseEntity.ok(cheques); // Si hay cheques encontrados
+        } */
+    }
 }
