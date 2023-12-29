@@ -1,5 +1,6 @@
 package com.GestorCheques.crudcheques.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,6 +71,10 @@ public class ChequeService {
 
     public List<Cheque> buscarPorMonto(double monto) {
         return chequeRepository.findByMontoGreaterThan(monto);
+    }
+
+    public List<Cheque> buscarPorFecha(Date fecha1, Date fecha2) {
+        return chequeRepository.findByFechaRecepcionBetween(fecha1, fecha2);
     }
 
 }
