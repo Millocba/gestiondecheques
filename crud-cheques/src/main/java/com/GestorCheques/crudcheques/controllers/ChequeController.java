@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +34,9 @@ public class ChequeController {
     public ChequeController(ChequeService chequeService) {
         this.chequeService = chequeService;
     }
-
+    
     @PostMapping("/agregar")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<String> agregarCheque(@Valid @RequestBody Cheque cheque) {
         
         Cheque chequeGuardado = chequeService.guardarCheque(cheque);
