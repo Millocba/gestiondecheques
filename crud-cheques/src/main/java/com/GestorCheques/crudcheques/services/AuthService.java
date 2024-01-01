@@ -1,4 +1,4 @@
-package com.GestorCheques.crudcheques.auth;
+package com.GestorCheques.crudcheques.services;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -6,6 +6,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.GestorCheques.crudcheques.auth.AuthResponse;
+import com.GestorCheques.crudcheques.auth.LoginRequest;
+import com.GestorCheques.crudcheques.auth.RegisterRequest;
 import com.GestorCheques.crudcheques.jwt.JwtService;
 import com.GestorCheques.crudcheques.models.Role;
 import com.GestorCheques.crudcheques.models.User;
@@ -35,13 +38,14 @@ public class AuthService {
     public AuthResponse register(RegisterRequest request) {
         User user = User.builder()
             .username(request.getUsername())
-            .password(passwordEncoder.encode( request.getPassword()))
-            .firstname(request.getFirstName())
-            .lastname(request.lastName)
+            .password(passwordEncoder.encode(request.getPassword()))
+            .firstname(request.getFirstname())
+            .lastname(request.getLastname())
             .country(request.getCountry())
             .role(Role.USER)
             .build();
-
+        
+        System.out.println("user "+ user);
         userRepository.save(user);
 
         return AuthResponse.builder()
