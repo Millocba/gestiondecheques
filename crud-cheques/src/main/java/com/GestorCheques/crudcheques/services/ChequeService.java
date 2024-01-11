@@ -58,17 +58,27 @@ public class ChequeService {
     
 
     public Cheque modificarCheque(String id, Cheque cheque) {
-        Optional<Cheque> chequeExistente = detalleCheque(id);
-
-        if (chequeExistente.isPresent()) {
-            // Guarda el cheque actualizado en la base de datos
-            return guardarCheque(cheque);
-        } else {
-            throw new ChequeNotFoundException(id);
-        }
-        
+        // Buscar el cheque existente por su id
+        Cheque chequeExistente = chequeRepository.findById(id)
+                .orElseThrow(() -> new ChequeNotFoundException(id));
+    
+        // Actualizar el cheque existente con los detalles proporcionados
+        chequeExistente.setFechaRecepcion(cheque.getFechaRecepcion());
+        chequeExistente.setEntregadoPor(cheque.getEntregadoPor());
+        chequeExistente.setNumeroCheque(cheque.getNumeroCheque());
+        chequeExistente.setBanco(cheque.getBanco());
+        chequeExistente.setMonto(cheque.getMonto());
+        chequeExistente.setTitularCheque(cheque.getTitularCheque());
+        chequeExistente.setCuit(cheque.getCuit());
+        chequeExistente.setFechaCobro(cheque.getFechaCobro());
+        chequeExistente.setEstado(cheque.getEstado());
+        chequeExistente.setNombreDestino(cheque.getNombreDestino());
+        chequeExistente.setCodigoDestino(cheque.getCodigoDestino());
+    
+        // Guardar el cheque actualizado en la base de datos
+        return chequeRepository.save(chequeExistente);
     }
-
+    
     public List<Cheque> buscarPorMonto(double monto) {
         return chequeRepository.findByMontoGreaterThan(monto);
     }
